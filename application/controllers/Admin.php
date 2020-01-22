@@ -102,4 +102,59 @@ class Admin extends CI_Controller {
         }
         redirect('admin');
     }
+
+    public function get_store_details($id){
+        if($data['products'] = $this->db->query("select * from store where branches_id=".$id." ")->result()){
+            $data['branch'] = $this->db->select('*')->from('branches')->where('id', $id)->limit(1)->get()->row();
+            $this->load->view('admin/store',$data);
+        }else{
+            redirect('admin');
+        }
+    }
+
+    public function add_product($id){
+        if(isset($_POST['submit'])){
+     		
+            try{
+                
+                $product_name = $this->input->post('name');
+                $quantity = $this->input->post('quantity');
+                $this->db->query("insert into store(`branches_id`, `product_name`, `qty`) values('".$id."','".$product_name."','".$quantity."' ) ");
+                echo "<script>alert('Product added to store!');</script>";
+            }
+            catch(Exception $e){
+                echo "<script>alert('Error :'"+$e->getMessage()+");</script>";
+            }
+    }
+    $this->load->view('admin/add_product');
+    }
+
+    public function delete_product($id){
+        if($this->db->query("delete from store WHERE id=".$id." ")){
+            echo "<script>alert('Product Deleted!');</script>";
+        }
+        redirect('admin');
+    }
+
+    public function edit_product($id){
+        $product['product'] = $this->db->select('*')->from('store')->where('id', $id)->limit(1)->get()->row();
+        if(isset($_POST['submit'])){
+            
+            try{
+                
+                $product_name = $this->input->post('name');
+                $quantity = $this->input->post('quantity');
+                // $this->db->query("insert into store(`branches_id`, `product_name`, `qty`) values('".$id."','".$product_name."','".$quantity."' ) ");
+                $this->db->query("UPDATE `store` SET `product_name` = '".$product_name."', `qty` = '".$quantity."' WHERE `store`.`id` =".$id." ");
+                echo "<script>alert('Product Edited!');</script>";
+                redirect('admin');
+            }
+            catch(Exception $e){
+                echo "<script>alert('Error :'"+$e->getMessage()+");</script>";
+            }
+            //$return_array['filename']  = $image["filename"]; 
+            // }
+        }
+        $this->load->view('admin/edit_product',$product);
+    }
 }

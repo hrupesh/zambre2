@@ -66,6 +66,11 @@ $route['logout']='Admin/logout';
 $route['admin/add-branch']='Admin/add_branch';
 $route['admin/edit-branch/(:num)']='Admin/edit_branch/$1';
 $route['admin/delete-branch/(:num)']='Admin/delete_branch/$1';
+$route['admin/store/(:num)']='Admin/get_store_details/$1';
+$route['admin/store/add-product/(:num)']='Admin/add_product/$1';
+$route['admin/store/edit-product/(:num)']='Admin/edit_product/$1';
+$route['admin/store/delete-product/(:num)']='Admin/delete_product/$1';
+
 
 
 $route['404_override'] = '';

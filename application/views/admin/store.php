@@ -158,8 +158,8 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title " style="font-size:1.8rem;"> Current Branches  
-                  <a class="pull-right"  href="<?php echo base_url(); ?>admin/add-branch"><button style="line-height:-40px;font-size:1.1rem;"  class="btn btn-info pull-left text-white" ><i class="material-icons text-white" style="font-size:2.0rem;" >add</i> Branch<div class="ripple-container"></div></button></a>
+                  <h4 class="card-title " style="font-size:1.8rem;"> Products in Store at <?php echo $branch->name; ?>  
+                  <a class="pull-right"  href="<?php echo base_url(); ?>admin/store/add-product/<?php echo $branch->id; ?>"><button style="line-height:-40px;font-size:1.1rem;"  class="btn btn-info pull-left text-white" ><i class="material-icons text-white" style="font-size:2.0rem;" >add</i> Product<div class="ripple-container"></div></button></a>
                   </h4>
                   <p class="card-category"></p>
                 </div>
@@ -174,12 +174,9 @@
                           Name
                         </th>
                         <th>
-                          Office Type
+                          Quantity
                         </th>
                         
-                        <th>
-                          Location
-                        </th>
                         <th>
                            
                         </th>
@@ -187,31 +184,26 @@
                            
                         </th>
                       </thead>
-                      <?php foreach($details as $branch){?>
+                      <?php foreach($products as $product){?>
                       <tbody>
                         <tr>
                           <td>
-                            <?php echo $branch->id; ?>
+                            <?php echo $product->id; ?>
                           </td>
                           <td>
-                            <a href="<?php echo base_url(); ?>admin/store/<?php echo $branch->id; ?>" style="text-decoration:underline;color:aqua;">
-                            <?php echo $branch->name; ?>
-                            </a>
+                            <?php echo $product->product_name; ?>
                           </td>
                           <td>
-                            <?php echo $branch->office_type; ?>
+                            <?php echo $product->qty; ?>
                           </td>
                           
                           <td>
-                            <?php echo $branch->location; ?>
-                          </td>
-                          <td>
-                          <a href="<?php base_url(); ?>admin/edit-branch/<?php echo $branch->id; ?>">
+                          <a href="<?php echo base_url(); ?>admin/store/edit-product/<?php echo $product->id; ?>">
                           <i class="material-icons text-warning">edit</i>
                           </a>
                           </td>
                           <td>
-                          <a href="<?php base_url(); ?>admin/delete-branch/<?php echo $branch->id; ?>">
+                          <a href="<?php echo base_url(); ?>admin/store/delete-product/<?php echo $product->id; ?>">
                           <i class="material-icons text-danger">delete</i>
                           </a>
                           </td>
